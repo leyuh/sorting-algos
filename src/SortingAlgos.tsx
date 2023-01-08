@@ -1,25 +1,45 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
 export default class SortingAlgos {
-    private static swap (arr: number[], i: number, j: number): void {
-        let temp: number = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
+
+    private static RUN_SPEED: number = 1000;
+
+    private static interval () {
+        return new Promise(r => setTimeout(r, SortingAlgos.RUN_SPEED));
     }
 
-    static selectionSort (arr: number[], setArr: Dispatch<SetStateAction<(number[])>>): void {
-        let tempArr = [...arr];
-        for (let i = 0; i < tempArr.length; i++) {
+    private static updateBarStatus (arr: number[][], setArr: Dispatch<SetStateAction<(number[][])>>, i: number, status: number): void {
+        setArr((prev) => {
+            let tempArr = [...prev];
+            tempArr[i][1] = status;
+            return tempArr;
+        })
+
+    }
+
+    private static async swap (arr: number[][], setArr: Dispatch<SetStateAction<(number[][])>>, i: number, j: number) {
+        setArr((prev) => {
+            let tempArr: number[][] = [...prev];
+            let temp: number[] = tempArr[i];
+            tempArr[i] = tempArr[j];
+            tempArr[j] = temp;
+            return tempArr;
+        })
+        await this.interval();
+    }
+
+    static async selectionSort (arr: number[][], setArr: Dispatch<SetStateAction<(number[][])>>) {
+        for (let i = 0; i < arr.length - 1; i++) {
+            console.log(arr);
+            await SortingAlgos.interval();
             let minIndx: number = i;
-            for (let j = i + 1; j < tempArr.length; j++) {
-                if (tempArr[j] < tempArr[minIndx]) {
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j][0] < arr[minIndx][0]) {
                     minIndx = j;
                 }
             }
-            SortingAlgos.swap(tempArr, i, minIndx);
-            console.log(tempArr);
+            await SortingAlgos.interval();
+            SortingAlgos.swap(arr, setArr, i, minIndx);
         }
-        setArr(tempArr);
-        console.log(tempArr);
     }
 }
