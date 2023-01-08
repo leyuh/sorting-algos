@@ -27,3 +27,27 @@
   display: inline-block;
   top: 0px;
 }
+
+#sorts-list {
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #bbb;
+  position: absolute;
+  top: 500px;
+}
+
+.sort-div {
+  width: calc(100% - 20px);
+  height: 50px;
+  border-radius: 10px;
+  background-color: white;
+  margin: 10px;
+}
+
+.sort-title {
+  font-size: 25px;
+  margin-left: 10px;
+  height: 100%;
+  line-height: 50px;
+}
