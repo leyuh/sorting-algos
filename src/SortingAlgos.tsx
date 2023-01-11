@@ -23,4 +23,22 @@ export default class SortingAlgos {
 
         return moves;
     }
+
+    static bubbleSort (arr: number[]): number[][] {
+
+        let tempArr: number[] = [...arr];
+        let moves: number[][] = [];
+
+        for (let i = 0; i < tempArr.length; i++) {
+            for (let j = 0; j < (tempArr.length - i - 1); j++) {
+                if (tempArr[j] > tempArr[j+1]) {
+                    swap(tempArr, j, j + 1);
+                    moves.push([j, j + 1]);
+                }
+            }
+        }
+
+        return moves;
+
+    }
 }

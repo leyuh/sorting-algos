@@ -11,7 +11,7 @@ function App() {
 
   const marginSize: number = 5;
 
-  const arrLength: number = 10;
+  const arrLength: number = 20;
 
   const [arr, setArr] = useState<number[]>([]);
 
@@ -29,7 +29,6 @@ function App() {
     <div id="app">
       <div id="visualizer">
         {arr.map((val: number, i: number) => {
-          console.log("rerender");
           return <Bar
             name={`bar-${i}`}
             height={`${val * ((visHeight - 20) / arrLength)}px`}
@@ -42,10 +41,14 @@ function App() {
 
       <div id="sorts-list">
         <div className="sort-div" id="selection-sort" onClick={() => {
-          console.log(SortingAlgos.selectionSort(arr));
           visualize(SortingAlgos.selectionSort(arr), arr, setArr);
         }}>
           <h1 className="sort-title">Selection Sort</h1>
+        </div>
+        <div className="sort-div" id="bubble-sort" onClick={() => {
+          visualize(SortingAlgos.bubbleSort(arr), arr, setArr);
+        }}>
+          <h1 className="sort-title">Bubble Sort</h1>
         </div>
       </div>
     </div>
