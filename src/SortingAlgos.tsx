@@ -3,37 +3,40 @@ import swap from './swap';
 
 export default class SortingAlgos {
 
-    static selectionSort (arr: number[]): number[][] {
-        let tempArr: number[] = [...arr];
+    static selectionSort (arr: number[][]): number[][] {
+        let tempArr: number[][] = [...arr];
         let moves: number[][] = [];
         // move = [i, j]
 
         for (let i = 0; i < tempArr.length - 1; i++) {
             let minIndx: number = i;
             for (let j = i + 1; j < tempArr.length; j++) {
-                if (tempArr[j] < tempArr[minIndx]) {
+                moves.push([1, j]);
+                if (tempArr[j][0] < tempArr[minIndx][0]) {
                     minIndx = j;
                 }
             }
             if (i != minIndx) {
                 swap(tempArr, i, minIndx);
-                moves.push([i, minIndx]);
+                moves.push([2, i, minIndx]);
             }
         }
 
         return moves;
     }
 
-    static bubbleSort (arr: number[]): number[][] {
+    static bubbleSort (arr: number[][]): number[][] {
 
-        let tempArr: number[] = [...arr];
+        let tempArr: number[][] = [...arr];
         let moves: number[][] = [];
 
         for (let i = 0; i < tempArr.length; i++) {
             for (let j = 0; j < (tempArr.length - i - 1); j++) {
-                if (tempArr[j] > tempArr[j+1]) {
+                moves.push([1, j]);
+                moves.push([1, j + 1]);
+                if (tempArr[j][0] > tempArr[j+1][0]) {
                     swap(tempArr, j, j + 1);
-                    moves.push([j, j + 1]);
+                    moves.push([2, j, j + 1]);
                 }
             }
         }
