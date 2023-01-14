@@ -63,11 +63,21 @@ export default class SortingAlgos {
         return moves;
     }
 
+    static merge (left: number[][], right: number[][]) {
+        
+    }
+
     static mergeSort (arr: number[][]): number[][] {
         let tempArr: number[][] = [...arr];
         let moves: number[][] = [];
         // move = [i, j]
        
+        let halfPoint: number = Math.ceil(tempArr.length / 2);
+        let left: number[][] = tempArr.slice(0, halfPoint);
+        let right: number[][] = tempArr.slice(halfPoint);
+
+        this.merge(left, right);
+
         return moves;
     }
 
