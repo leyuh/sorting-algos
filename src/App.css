@@ -33,6 +33,7 @@
   background-color: #bbb;
   position: absolute;
   top: 500px;
+  overflow-y: scroll;
 }
 
 .sort-div {

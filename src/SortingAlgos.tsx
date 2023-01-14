@@ -44,4 +44,48 @@ export default class SortingAlgos {
         return moves;
 
     }
+
+    static insertionSort (arr: number[][]): number[][] {
+        let tempArr: number[][] = [...arr];
+        let moves: number[][] = [];
+        // move = [i, j]
+        for (let i = 1; i < tempArr.length; i++) {
+            let current = tempArr[i];
+            moves.push([1, i]);
+            let j = i - 1;
+            while ((j > -1) && (current[0] < tempArr[j][0])) {
+                swap(tempArr, j+1, j);
+                moves.push([2, j+1, j]);
+                j--;
+            }
+        }
+
+        return moves;
+    }
+
+    static mergeSort (arr: number[][]): number[][] {
+        let tempArr: number[][] = [...arr];
+        let moves: number[][] = [];
+        // move = [i, j]
+       
+        return moves;
+    }
+
+    static quickSort (arr: number[][]): number[][] {
+        let tempArr: number[][] = [...arr];
+        let moves: number[][] = [];
+        // move = [i, j]
+
+
+        return moves;
+    }
+
+    static heapSort (arr: number[][]): number[][] {
+        let tempArr: number[][] = [...arr];
+        let moves: number[][] = [];
+        // move = [i, j]
+
+
+        return moves;
+    }
 }

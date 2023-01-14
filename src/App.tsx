@@ -6,14 +6,14 @@ import visualize from './visualize';
 
 function App() {
 
-  const SPEED: number = 20;
+  const SPEED: number = 150;
 
   const visWidth: number = 600;
   const visHeight: number = 400;
 
-  const marginSize: number = 1;
+  const marginSize: number = 5;
 
-  const arrLength: number = 25;
+  const arrLength: number = 15;
 
   const [arr, setArr] = useState<number[][]>([]);
 
@@ -75,6 +75,26 @@ function App() {
           visualize(SortingAlgos.bubbleSort(arr), arr, setArr);
         }}>
           <h1 className="sort-title">Bubble Sort</h1>
+        </div>
+        <div className="sort-div" id="insertion-sort" onClick={() => {
+          visualize(SortingAlgos.insertionSort(arr), arr, setArr);
+        }}>
+          <h1 className="sort-title">Insertion Sort</h1>
+        </div>
+        <div className="sort-div" id="merge-sort" onClick={() => {
+          visualize(SortingAlgos.mergeSort(arr), arr, setArr);
+        }}>
+          <h1 className="sort-title">Merge Sort</h1>
+        </div>
+        <div className="sort-div" id="quick-sort" onClick={() => {
+          visualize(SortingAlgos.quickSort(arr), arr, setArr);
+        }}>
+          <h1 className="sort-title">Quick Sort</h1>
+        </div>
+        <div className="sort-div" id="heap-sort" onClick={() => {
+          visualize(SortingAlgos.heapSort(arr), arr, setArr);
+        }}>
+          <h1 className="sort-title">Heap Sort</h1>
         </div>
       </div>
     </div>
