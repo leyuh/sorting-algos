@@ -63,22 +63,70 @@ export default class SortingAlgos {
         return moves;
     }
 
-    static merge (left: number[][], right: number[][]) {
-        
+    static merge (leftArr: number[][], rightArr: number[][], moves: number[][]) {
+
+        let mergedArr: number[][] = [];
+
+        let leftIndx : number = 0;
+        let rightIndx : number = 0;
+        let mergedIndx: number = 0;
+
+        while (leftIndx < leftArr.length && rightIndx < rightArr.length) {
+            if (leftArr[leftIndx][0] <= rightArr[rightIndx][0]) {
+                
+                moves.push([2, (mergedIndx + leftArr[0][2]), leftArr[leftIndx][2]]);
+                mergedArr[mergedIndx] = leftArr[leftIndx];
+                leftIndx++;
+            } else {
+                
+                moves.push([2, (mergedIndx + leftArr[0][2]), rightArr[rightIndx][2]]);
+                mergedArr[mergedIndx] = rightArr[rightIndx];
+                rightIndx++;
+            }
+            mergedIndx++;
+        }
+
+        while (leftIndx < leftArr.length) {
+            moves.push([2, (mergedIndx + leftArr[0][2]), leftArr[leftIndx][2]]);
+            mergedArr[mergedIndx] = leftArr[leftIndx];
+            leftIndx++;
+            mergedIndx++;
+        }
+        while (rightIndx < rightArr.length) {
+            moves.push([2, (mergedIndx + leftArr[0][2]), rightArr[rightIndx][2]]);
+            mergedArr[mergedIndx] = rightArr[rightIndx];
+            rightIndx++;
+            mergedIndx++;
+        }
+
+        return mergedArr;
+    }
+
+    static mergeSortMain(arr: number[][], moves: number[][]) {
+ 
+        if (arr.length == 1) {
+            return arr;
+        }
+
+        let left: number[][] = this.mergeSortMain([...arr].slice(0, (Math.floor(arr.length / 2))), moves);
+        let right: number[][] = this.mergeSortMain([...arr].slice((Math.floor(arr.length / 2))), moves);
+
+        return this.merge(left, right, moves);
     }
 
     static mergeSort (arr: number[][]): number[][] {
+
         let tempArr: number[][] = [...arr];
+        for (let i = 0; i < tempArr.length; i++) {
+            tempArr[i].push(i);
+        }
         let moves: number[][] = [];
-        // move = [i, j]
+        // move = [type, i, j]
+
        
-        let halfPoint: number = Math.ceil(tempArr.length / 2);
-        let left: number[][] = tempArr.slice(0, halfPoint);
-        let right: number[][] = tempArr.slice(halfPoint);
-
-        this.merge(left, right);
-
+        this.mergeSortMain(tempArr, moves);
         return moves;
+        
     }
 
     static quickSort (arr: number[][]): number[][] {

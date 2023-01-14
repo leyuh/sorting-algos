@@ -6,14 +6,14 @@ import visualize from './visualize';
 
 function App() {
 
-  const SPEED: number = 150;
+  const SPEED: number = 350;
 
   const visWidth: number = 600;
   const visHeight: number = 400;
 
   const marginSize: number = 5;
 
-  const arrLength: number = 15;
+  const arrLength: number = 5;
 
   const [arr, setArr] = useState<number[][]>([]);
 
@@ -82,6 +82,7 @@ function App() {
           <h1 className="sort-title">Insertion Sort</h1>
         </div>
         <div className="sort-div" id="merge-sort" onClick={() => {
+          console.log(SortingAlgos.mergeSort(arr));
           visualize(SortingAlgos.mergeSort(arr), arr, setArr);
         }}>
           <h1 className="sort-title">Merge Sort</h1>

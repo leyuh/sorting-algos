@@ -2,7 +2,7 @@ import swap from './swap';
 import React, { Dispatch, SetStateAction } from 'react';
 
 
-const SPEED: number = 150;
+const SPEED: number = 350;
 
 const timeout = (time: number) => {
     return new Promise((res) => setTimeout(res, time));
