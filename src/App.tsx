@@ -13,7 +13,7 @@ function App() {
 
   const marginSize: number = 5;
 
-  const arrLength: number = 5;
+  const arrLength: number = 10;
 
   const [arr, setArr] = useState<number[][]>([]);
 
@@ -80,22 +80,6 @@ function App() {
           visualize(SortingAlgos.insertionSort(arr), arr, setArr);
         }}>
           <h1 className="sort-title">Insertion Sort</h1>
-        </div>
-        <div className="sort-div" id="merge-sort" onClick={() => {
-          console.log(SortingAlgos.mergeSort(arr));
-          visualize(SortingAlgos.mergeSort(arr), arr, setArr);
-        }}>
-          <h1 className="sort-title">Merge Sort</h1>
-        </div>
-        <div className="sort-div" id="quick-sort" onClick={() => {
-          visualize(SortingAlgos.quickSort(arr), arr, setArr);
-        }}>
-          <h1 className="sort-title">Quick Sort</h1>
-        </div>
-        <div className="sort-div" id="heap-sort" onClick={() => {
-          visualize(SortingAlgos.heapSort(arr), arr, setArr);
-        }}>
-          <h1 className="sort-title">Heap Sort</h1>
         </div>
       </div>
     </div>
