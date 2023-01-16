@@ -8,6 +8,8 @@ function App() {
 
   const [SPEED, setSPEED] = useState<number>(150);
 
+  const [forceQuit, setForceQuit] = useState<boolean>(false);
+
   const visWidth: number = 600;
   const visHeight: number = 400;
 
@@ -31,6 +33,19 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    let speed: string | null = localStorage.getItem("speed");
+    let length: string | null = localStorage.getItem("arr-length");
+    if (speed != null) {
+      setSPEED(parseInt(speed));
+    }
+    if (length != null) {
+      setArrLength(parseInt(length));
+      console.log("set");
+    }
+    refresh();
+  }, [])
+
   const updateBar = async (i: number) => {
     await timeout(SPEED);
     setArr((prev) => {
@@ -51,10 +66,6 @@ function App() {
     refresh();
   }, [arrLength]);
 
-  useEffect(() => {
-    refresh();
-  }, [])
-
   // revert modes of bars
 
   useEffect(() => {
@@ -68,7 +79,7 @@ function App() {
   return (
     <div id="app">
       <div id="control-panel">
-        <input id="bars-input" defaultValue={arrLength} onBlur={(e) => {
+        <input id="bars-input" defaultValue={localStorage.getItem("arr-length") || arrLength} onBlur={(e) => {
           let num = parseInt(e.target.value);
           if (num) {
             if (num < 2) {
@@ -78,8 +89,9 @@ function App() {
             }
           }
           setArrLength(num);
+          localStorage.setItem("arr-length", num.toString());
         }}></input>
-        <input id="speed-input" defaultValue={SPEED} onBlur={(e) => {
+        <input id="speed-input" defaultValue={localStorage.getItem("speed") || SPEED} onBlur={(e) => {
           let num = parseInt(e.target.value);
           if (num) {
             if (num < 10) {
@@ -89,9 +101,12 @@ function App() {
             }
           }
           setSPEED(num);
+          localStorage.setItem("speed", num.toString());
         }}></input>
         <button id="refresh" onClick={() => {
-          refresh();
+          
+          window.location.reload();
+          setForceQuit(true);
         }}>R</button>
       </div>
 
