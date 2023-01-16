@@ -19,6 +19,32 @@
   border-radius: 10px;
   position: absolute;
   display: flex;
+  top: 90px;
+}
+
+#control-panel {
+  width: 600px;
+  height: 60px;
+  background-color: #bbb;
+  border-radius: 10px;
+  border: 0px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  top: 20px;
+}
+
+#control-panel > * {
+  margin: 10px;
+  height: 40px;
+  width: 100px;
+  background-color: white;
+  border: 0px;
+  border-radius: 10px;
+}
+
+#control-panel > button {
+  width: 40px;
 }
 
 .bar {
@@ -33,7 +59,7 @@
   border-radius: 10px;
   background-color: #bbb;
   position: absolute;
-  top: 500px;
+  top: 550px;
   overflow-y: scroll;
 }
 

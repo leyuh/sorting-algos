@@ -1,18 +1,15 @@
 import swap from './swap';
 import React, { Dispatch, SetStateAction } from 'react';
 
-
-const SPEED: number = 350;
-
 const timeout = (time: number) => {
     return new Promise((res) => setTimeout(res, time));
 }
 
 // MOVE = [TYPE, I, J]
 
-export default async function visualize (moves: number[][], arr: number[][], setArr: Dispatch<SetStateAction<number[][]>>) {
+export default async function visualize (moves: number[][], arr: number[][], setArr: Dispatch<SetStateAction<number[][]>>, speed: number) {
     for (let i = 0; i < moves.length; i++) {
-        await timeout(SPEED);
+        await timeout(speed);
         setArr((prev) => {
             let tempArr: number[][] = [...prev];
             if (moves[i][0] == 2) {

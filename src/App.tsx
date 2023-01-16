@@ -6,19 +6,29 @@ import visualize from './visualize';
 
 function App() {
 
-  const SPEED: number = 350;
+  const [SPEED, setSPEED] = useState<number>(150);
 
   const visWidth: number = 600;
   const visHeight: number = 400;
 
-  const marginSize: number = 5;
+  const [marginSize, setMarginSize] = useState<number>(2.5);
 
-  const arrLength: number = 10;
+  const [arrLength, setArrLength] = useState<number>(15);
 
   const [arr, setArr] = useState<number[][]>([]);
 
   const timeout = (time: number) => {
       return new Promise((res) => setTimeout(res, time));
+  }
+
+  const refresh = () => {
+    setArr([]);
+    for (let i = 0; i < arrLength; i++) {
+      let randNum: number = Math.ceil(Math.random() * arrLength);
+      setArr((prev) => {
+        return [...prev, [randNum, 0]];
+      })
+    }
   }
 
   const updateBar = async (i: number) => {
@@ -31,13 +41,18 @@ function App() {
   }
 
   useEffect(() => {
-    for (let i = 0; i < arrLength; i++) {
-      let randNum: number = Math.ceil(Math.random() * arrLength);
-      setArr((prev) => {
-        return [...prev, [randNum, 0]];
-      })
+    if (arrLength < 30) {
+      setMarginSize(5);
+    } else if (arrLength < 60) {
+      setMarginSize(2.5);
+    } else {
+      setMarginSize(1);
     }
+    refresh();
+  }, [arrLength]);
 
+  useEffect(() => {
+    refresh();
   }, [])
 
   // revert modes of bars
@@ -52,6 +67,34 @@ function App() {
 
   return (
     <div id="app">
+      <div id="control-panel">
+        <input id="bars-input" defaultValue={arrLength} onBlur={(e) => {
+          let num = parseInt(e.target.value);
+          if (num) {
+            if (num < 2) {
+              num = 2;
+            } else if (num > 100) {
+              num = 100;
+            }
+          }
+          setArrLength(num);
+        }}></input>
+        <input id="speed-input" defaultValue={SPEED} onBlur={(e) => {
+          let num = parseInt(e.target.value);
+          if (num) {
+            if (num < 10) {
+              num = 10;
+            } else if (num > 500) {
+              num = 500;
+            }
+          }
+          setSPEED(num);
+        }}></input>
+        <button id="refresh" onClick={() => {
+          refresh();
+        }}>R</button>
+      </div>
+
       <div id="visualizer">
         {arr.map((val: number[], i: number) => {
           return <Bar
@@ -67,17 +110,17 @@ function App() {
 
       <div id="sorts-list">
         <div className="sort-div" id="selection-sort" onClick={() => {
-          visualize(SortingAlgos.selectionSort(arr), arr, setArr);
+          visualize(SortingAlgos.selectionSort(arr), arr, setArr, SPEED);
         }}>
           <h1 className="sort-title">Selection Sort</h1>
         </div>
         <div className="sort-div" id="bubble-sort" onClick={() => {
-          visualize(SortingAlgos.bubbleSort(arr), arr, setArr);
+          visualize(SortingAlgos.bubbleSort(arr), arr, setArr, SPEED);
         }}>
           <h1 className="sort-title">Bubble Sort</h1>
         </div>
         <div className="sort-div" id="insertion-sort" onClick={() => {
-          visualize(SortingAlgos.insertionSort(arr), arr, setArr);
+          visualize(SortingAlgos.insertionSort(arr), arr, setArr, SPEED);
         }}>
           <h1 className="sort-title">Insertion Sort</h1>
         </div>
